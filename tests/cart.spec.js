@@ -1,16 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
 
 test('Add a product to cart', async ({ page }) => {
-    // Go to main page and click login
-
-    await page.goto('https://www.demoblaze.com/index.html');
-    await page.click('#login2');
-
     // Login to account
 
-    await page.fill('#loginusername', 'John S1');
-    await page.fill('#loginpassword', 'Password');
-    await page.click('#logInModal .btn-primary');
+    await page.goto('https://www.demoblaze.com/');
+    const loginPage = new LoginPage(page);
+    await loginPage.login('John S1', 'Password');
 
     // Click product
 
@@ -31,16 +27,11 @@ test('Add a product to cart', async ({ page }) => {
 });
 
 test('View cart and verify product is there', async ({ page }) => {
-    // Go to main page and click login
-
-    await page.goto('https://www.demoblaze.com/index.html');
-    await page.click('#login2');
-
     // Login to account
 
-    await page.fill('#loginusername', 'John S1');
-    await page.fill('#loginpassword', 'Password');
-    await page.click('#logInModal .btn-primary');
+    await page.goto('https://www.demoblaze.com/');
+    const loginPage = new LoginPage(page);
+    await loginPage.login('John S1', 'Password');
 
     // Click product
 
