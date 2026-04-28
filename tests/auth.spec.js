@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { TEST_USER } from '../test-data';
 
 test('Login with username and password', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await page.goto('/');
-    await loginPage.login('John S1', 'Password');
+    await loginPage.login(TEST_USER.username, TEST_USER.password);
 
-    await expect(page.locator('#nameofuser')).toHaveText('Welcome John S1');
+    await expect(page.locator('#nameofuser')).toHaveText('Welcome ${TEST_USER.username}');
 });
 
 test('Failed login with username and password', async ({ page }) => {

@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { TEST_USER } from '../test-data';
 
 test('Add a product to cart', async ({ page }) => {
     // Login to account
 
     await page.goto('/');
     const loginPage = new LoginPage(page);
-    await loginPage.login('John S1', 'Password');
+    await loginPage.login(TEST_USER.username, TEST_USER.password);
 
     // Click product
 
@@ -31,7 +32,7 @@ test('View cart and verify product is there', async ({ page }) => {
 
     await page.goto('/');
     const loginPage = new LoginPage(page);
-    await loginPage.login('John S1', 'Password');
+    await loginPage.login(TEST_USER.username, TEST_USER.password);
 
     // Click product
 
