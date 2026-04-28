@@ -4,7 +4,7 @@ import { LoginPage } from '../pages/LoginPage';
 test('Login with username and password', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto('/');
     await loginPage.login('John S1', 'Password');
 
     await expect(page.locator('#nameofuser')).toHaveText('Welcome John S1');
@@ -13,7 +13,7 @@ test('Login with username and password', async ({ page }) => {
 test('Failed login with username and password', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto('/');
 
     page.on('dialog', async dialog => {
         expect(dialog.message()).toContain('User does not exist.');

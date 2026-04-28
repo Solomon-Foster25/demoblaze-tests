@@ -4,7 +4,7 @@ import { LoginPage } from '../pages/LoginPage';
 test('Add a product to cart', async ({ page }) => {
     // Login to account
 
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto('/');
     const loginPage = new LoginPage(page);
     await loginPage.login('John S1', 'Password');
 
@@ -29,7 +29,7 @@ test('Add a product to cart', async ({ page }) => {
 test('View cart and verify product is there', async ({ page }) => {
     // Login to account
 
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto('/');
     const loginPage = new LoginPage(page);
     await loginPage.login('John S1', 'Password');
 
@@ -42,7 +42,6 @@ test('View cart and verify product is there', async ({ page }) => {
     page.on('dialog', async dialog => {
         expect(dialog.type()).toContain("alert");
         expect(dialog.message()).toContain("Product added.");
-
         await dialog.accept();
     });
     
