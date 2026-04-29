@@ -9,7 +9,7 @@ test.describe('Authentication', () => {
         await page.goto('/');
         await loginPage.login(TEST_USER.username, TEST_USER.password);
 
-        await expect(page.locator('#nameofuser')).toHaveText('Welcome ${TEST_USER.username}');
+        await expect(page.locator('#nameofuser')).toHaveText(`Welcome ${TEST_USER.username}`);
     });
 
     test('Failed login with username and password', async ({ page }) => {
