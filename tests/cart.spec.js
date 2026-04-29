@@ -41,9 +41,13 @@ test.describe('Cart', () => {
 
         await page.click('#cartur');
 
-        // Assert product name is on the cart
+        // Wait for cart table
+    
+        await page.waitForSelector('tbody tr', { timeout: 10000 });
 
-        await expect(page.locator('.success td').first()).toHaveText(page.productName);
+        // Assert product name is in the cart
+
+        await expect(page.locator('tbody tr td').nth(1)).toHaveText(page.productName);
     });
 
 });
