@@ -13,6 +13,7 @@ test.describe('Cart', () => {
 
         // Click product
 
+        const productName = await page.locator('.card-title a').first().innerText();
         await page.locator('.card-title a').first().click();
 
         // Confirm alert appears and handle it
@@ -20,13 +21,15 @@ test.describe('Cart', () => {
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain("alert");
             expect(dialog.message()).toContain("Product added.");
-
             await dialog.accept();
         });
 
         // Add to cart
 
         await page.click('.btn.btn-success.btn-lg');
+
+        // Store on page object so tests can access it
+        page.productName = productName;
     });
 
     test('Add a product to cart', async ({ page }) => {
@@ -40,7 +43,8 @@ test.describe('Cart', () => {
 
         // Assert product name is on the cart
 
-        await expect(page.locator('.success').first()).toBeVisible();
+        await expect(page.locator('.success').first()).toHaveText(page.productName);
     });
 
 });
+
