@@ -25,4 +25,20 @@ test.describe('Authentication', () => {
         await loginPage.login('fakeuser123', 'wrongpassword');
     });
 
+    test('Logout successfully', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await page.goto('/');
+        await loginPage.login(TEST_USER.username, TEST_USER.password);
+
+        // Wait for welcome text to confirm login was successful
+        await expect(page.locator('#nameofuser')).toHaveText(`Welcome ${TEST_USER.username}`);
+
+        // Click logout
+        await page.click('#logout2');
+
+        // Verify welcome text is gone
+        await expect(page.locator('#nameofuser')).toBeHidden();
+    });
+
 });
