@@ -11,10 +11,7 @@ test.describe('Authentication', () => {
 
         await expect(page.locator('#nameofuser')).toHaveText('Welcome ${TEST_USER.username}');
     });
-    
-});
 
-test.describe('Authentication', () => {
     test('Failed login with username and password', async ({ page }) => {
         const loginPage = new LoginPage(page);
 
