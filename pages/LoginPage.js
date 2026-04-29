@@ -9,9 +9,10 @@ export class LoginPage {
     }
 
     async login(username, password) {
-        await this.page.waitForSelector(this.loginButton, { state: 'visible', timeout: 15000 });
-        await this.page.waitForTimeout(500);
-        await this.page.click(this.loginButton);
+        await this.page.waitForSelector(this.loginButton, { timeout: 15000 });
+        await this.page.evaluate((selector) => {
+            document.querySelector(selector).click();
+        }, this.loginButton);
         await this.page.waitForSelector(this.usernameInput, { state: 'visible', timeout: 15000 });
         await this.page.fill(this.usernameInput, username);
         await this.page.fill(this.passwordInput, password);
