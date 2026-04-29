@@ -43,7 +43,7 @@ test.describe('Cart', () => {
 
         // Assert product name is on the cart
 
-        await expect(page.locator('.success').first()).toHaveText(page.productName);
+        await expect(page.locator('.success td').first()).toHaveText(page.productName);
     });
 
 });
