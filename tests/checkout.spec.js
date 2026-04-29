@@ -1,24 +1,18 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { TEST_USER } from '../test-data';
 
 test.describe('Checkout', () => {
 
     test('Place an order successfully', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-
         // Login and add a product to cart
         await page.goto('/');
-        await loginPage.login(TEST_USER.username, TEST_USER.password);
         await page.locator('.card-title a').first().click();
 
         page.on('dialog', async dialog => {
             await dialog.accept();
         });
 
-        await page.click('.btn.btn-success.btn-lg');
-
         // Navigate to cart
+        await page.click('.btn.btn-success.btn-lg');
         await page.click('#cartur');
         await page.waitForSelector('tbody tr', { timeout: 10000 });
 
