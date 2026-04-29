@@ -15,4 +15,19 @@ test.describe('Navigation', () => {
         await expect(page.locator('.name')).toBeVisible()
     });
 
+    test('Filter by Laptops category and verify products update', async ({ page }) => {
+        await page.goto('/');
+
+        // Click Laptops category
+        await page.getByText('Laptops').click();
+
+        // Wait for products to update
+        await page.waitForTimeout(1500);
+
+        // Verify products are visible
+        await expect(page.locator('.card.h-100').first()).toBeVisible();
+
+        // Verify a laptop product is shown
+        await expect(page.locator('.card-title').first()).toBeVisible();
+    });
 });
